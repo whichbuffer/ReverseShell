@@ -1,3 +1,9 @@
+# POC
+
+https://twitter.com/whichbuffer/status/1333889053851340805?s=20
+
+https://www.youtube.com/watch?v=4k0Xkf4PuMs
+
 # Compile it
 ````
 i686-w64-mingw32-g++ shell.cpp -o shell.exe -lws2_32 -lwininet -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc
